@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}{{ block.super }} | Answers {% endblock title %}
+{% block content %}
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <h2>Answers</h2>
+            {% for question in questions %}
+                <div {% if question.actual %} class="text-primary" {% endif %}>
+                    {% if question.actual %}
+                        <h2>Actual:</h2>
+                    {% endif %}
+                    <p class="lead">{{ question.text }}</p><hr>
+                    <div class="row answers">
+                        {% for answer in question.answer_set.all %}
+                            <div class="col-sm-4">{{ answer.get_created_at }}</div>
+                            <div class="col-sm-8">{{ answer.text }}</div>
+                        {% empty %}
+                            <div class="pull-right">
+                                <em>Question {% if question.actual %}has{% else %}had{% endif %} no answers</em>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% empty %}
+                Here is no old editions of question
+            {% endfor %}
+
+        </div>
+    </div>
+
+{% endblock %}

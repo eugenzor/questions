@@ -26,6 +26,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
+    'crispy_forms',
+
     'questions',
 ]
 
@@ -96,3 +98,5 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'

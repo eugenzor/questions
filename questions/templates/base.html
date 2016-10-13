@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>{% block title %}Django Project{% endblock title %}</title>
+        <title>{% block title %}Questions Project{% endblock title %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -49,14 +49,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{% url 'home' %}">Django Project</a>
+                    <a class="navbar-brand" href="{% url 'question_list' %}">Questions</a>
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
-{% comment %}
-                    <ul class="nav navbar-nav">
-                        <li><a href="{% url 'list' %}">Menu</a></li>
-                    </ul>
 
+                    <ul class="nav navbar-nav">
+                        <li><a href="{% url 'question_list' %}">Question List</a></li>
+                        <li><a href="{% url 'question_create' %}">Add Question</a></li>
+                    </ul>
+{% comment %}
                     <ul class="nav navbar-nav navbar-right">
                         <li class="nav-item">
                             <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">"Sign In"</a>

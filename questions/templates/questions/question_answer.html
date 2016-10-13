@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ block.super }} | Question #{{ question.pk }} {% endblock title %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-3 text-center">
+            <a href="{% url 'question_create' %}" class="btn btn-primary">
+                New Question
+            </a>
+        </div>
+
+        <div class="col-sm-6">
+
+            <h2>Question #{{ question.pk }}</h2>
+            {{ question.text }}
+            <a href="{% url 'question_update' pk=question.pk %}" class="btn btn-primary">
+                Edit question
+            </a>
+            ({{ question.edit_count }} edit{{ question.edit_count|pluralize }})
+            <div>
+                <h3>Answer:</h3>
+                <form action="" method="post"  class="answer-form">{% csrf_token %}
+                    <div class="row">
+                        <div class="col-sm-8">
+                            {{ form | crispy }}
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <input class="btn btn-default" type="submit" value="Save" />
+                        </div>
+                    </div>
+
+
+
+                </form>
+            </div>
+
+            <h2>Past answers</h2>
+            <div class="row answers">
+                {% for answer in question.answer_set.all %}
+                    <div class="col-sm-4">{{ answer.get_created_at }}</div>
+                    <div class="col-sm-8">{{ answer.text }}</div>
+                {% empty %}
+                    <p>There is no answers yet</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="col-sm-3 text-center">
+            <a href="{% url 'old_questions' question.subject_id %}" class="btn btn-info">
+                Old Questions
+            </a>
+        </div>
+    </div>
+
+{% endblock %}

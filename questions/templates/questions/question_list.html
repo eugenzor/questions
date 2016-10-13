@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ block.super }} | Question List{% endblock title %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+                <h2>Question List</h2>
+                {% for question in object_list %}
+                    <div>
+                        <p class="lead">
+                            {{ question.text }} ({{ question.edit_count }} edit{{ question.edit_count|pluralize }})
+                        </p>
+
+
+                        <div>
+                            <a href="{% url 'total_answers' pk=question.subject_id %}" class="btn btn-info">
+                                Show {{ question.answer_count }} answer{{ question.answer_count|pluralize }} total
+                            </a>
+
+                            <a href="{% url 'question_answer' question.pk %}" class="btn btn-primary">
+                                Answer
+                            </a>
+                        </div>
+                        <hr>
+
+                    </div>
+                {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
